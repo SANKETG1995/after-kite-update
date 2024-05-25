@@ -1,0 +1,3 @@
+enc:'dscvsdfdtf'
+name:'NSE:ASDF'
+quantity:0

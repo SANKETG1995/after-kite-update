@@ -1,0 +1,31 @@
+
+while True:
+  enctoken = input("Enter enc token \n\n")
+  user_input = input("Please choose a case:\n 1. \n Get current position \n case2\n case3\n")
+
+  # Define functions for different cases
+  def 1():
+    kite = KiteApp(enctoken=enctoken)
+    print(kite.positions())
+  def 2():
+    print("This is case 2\n")
+
+  def 3():
+    print("This is case 3\n")
+
+  #  Create a dictionary that maps case values to functions
+  case_dict = {
+    "1": case1,
+    "2": case2,
+    "3": case3,
+  }
+
+  # Define the case value
+  selected_case = user_input
+
+  #  Check if the selected_case exists in the dictionary, then execute the corresponding function
+  if selected_case in case_dict:
+    case_dict[selected_case]()
+  else:
+    print("Wrong input\n\n\n")
+    break

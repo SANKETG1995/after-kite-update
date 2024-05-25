@@ -1,0 +1,127 @@
+- name: ecfe
+   # ECFE speaker will be deployed in any node pool with label 'ecfe-speaker: true'
+     spec:
+      node_selectors:
+       speaker:
+         ecfe-speaker: "true"
+      allocate_speakers: true
+      enable_guaranteed_qos: false
+      config: |
+        bgp-bfd-peers:
+        - peer-address: 10.145.227.2
+          peer-asn: 64712
+          my-asn: 64717
+          min-rx: 300ms
+          min-tx: 300ms
+          multiplier: 3
+          node-selectors:
+          - match-labels:
+              node-pool: control-plane
+          my-address-pools:
+          - ccd-ecfe-om-pool #ccd_ecfe_om_pool
+        - peer-address: 10.145.227.3
+          peer-asn: 64712
+          my-asn: 64717
+          min-rx: 300ms
+          min-tx: 300ms
+          multiplier: 3
+          node-selectors:
+          - match-labels:
+              node-pool: control-plane
+          my-address-pools:
+          - ccd-ecfe-om-pool  #ccd_ecfe_om_pool
+        - peer-address: 10.145.228.2
+          peer-asn: 64712
+          my-asn: 64717
+          min-rx: 300ms
+          min-tx: 300ms
+          multiplier: 3
+          node-selectors:
+          - match-labels:
+              node-role.kubernetes.io/worker: worker
+          my-address-pools:
+          - ccd-ecfe-iam-om-pool #ccd_ecfe_iam_om_pool
+        - peer-address: 10.145.228.3
+          peer-asn: 64712
+          my-asn: 64717
+          min-rx: 300ms
+          min-tx: 300ms
+          multiplier: 3
+          node-selectors:
+          - match-labels:
+              node-role.kubernetes.io/worker: worker
+          my-address-pools:
+          - ccd-ecfe-iam-om-pool #ccd_ecfe_iam_om_pool
+        - peer-address: 10.174.156.2
+          peer-asn: 64714
+          my-asn: 64719
+          min-rx: 300ms
+          min-tx: 300ms
+          multiplier: 3
+          node-selectors:
+          - match-labels:
+              node-role.kubernetes.io/worker: worker
+          my-address-pools:
+          - ccd-ecfe-iam-tr1-pool #ccd_ecfe_iam_tr1_pool
+          - ccd-iam-pool-bpi #ccd_iam_pool_bpi
+        - peer-address: 10.174.156.3
+          peer-asn: 64714
+          my-asn: 64719
+          min-rx: 300ms
+          min-tx: 300ms
+          multiplier: 3
+          node-selectors:
+          - match-labels:
+              node-role.kubernetes.io/worker: worker
+          my-address-pools:
+          - ccd-ecfe-iam-tr1-pool #ccd_ecfe_iam_tr1_pool
+          - ccd-iam-pool-bpi #ccd_iam_pool_bpi
+        - peer-address: 10.174.157.2
+          peer-asn: 64714
+          my-asn: 64719
+          min-rx: 300ms
+          min-tx: 300ms
+          multiplier: 3
+          node-selectors:
+          - match-labels:
+              node-role.kubernetes.io/worker: worker
+          my-address-pools:
+          - ccd-ecfe-iam-repl1-pool #ccd_ecfe_iam_repl1_pool
+        - peer-address: 10.174.157.3
+          peer-asn: 64714
+          my-asn: 64719
+          min-rx: 300ms
+          min-tx: 300ms
+          multiplier: 3
+          node-selectors:
+          - match-labels:
+              node-role.kubernetes.io/worker: worker
+          my-address-pools:
+          - ccd-ecfe-iam-repl1-pool #ccd_ecfe_iam_repl1_pool
+
+        address-pools:
+        - name: ccd-ecfe-om-pool #ccd_ecfe_om_pool
+          protocol: bgp
+          addresses:
+          - 10.145.225.176/29
+          auto-assign: false
+        - name: ccd-ecfe-iam-tr1-pool #ccd_ecfe_iam_tr1_pool
+          protocol: bgp
+          addresses:
+          - 10.174.158.64/26
+          auto-assign: false
+        - name: ccd-iam-pool-bpi #ccd_iam_pool_bpi
+          protocol: bgp
+          addresses:
+          - 10.174.158.1/32
+          auto-assign: false
+        - name: ccd-ecfe-iam-om-pool #ccd_ecfe_iam_om_pool
+          protocol: bgp
+          addresses:
+          - 10.145.229.0/25
+          auto-assign: false
+        - name: ccd-ecfe-iam-repl1-pool #ccd_ecfe_iam_repl1_pool
+          protocol: bgp
+          addresses:
+          - 10.174.152.0/24
+          auto-assign: false

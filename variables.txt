@@ -1,0 +1,4 @@
+enc_token='whZlhIGcgV813aZPS5TFDuY6Sf7yhWZ+x3V+VMMVQFaPcT189QdRK3LiDNS1UxX8a7QtG8wZBDmmVP3xMMW9fK73w3J0EIgLq2mbAgAigkgVSKp6U6J8zA=='
+stock_name='NSE:PNB'
+quantity=1
+code=5215745
