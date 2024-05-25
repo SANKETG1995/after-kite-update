@@ -59,6 +59,7 @@ kws.connect(threaded=True)
 
 # Wait for the connection to be established
 while not kws.is_connected():
+    time.sleep(1)
     pass
     
     #print("WebSocket connection established")
@@ -73,35 +74,40 @@ def case1():
     print("Test Profit is --->", q['equity']['available']['opening_balance'])
     
     profit = q['equity']['available']['live_balance'] - q['equity']['available']['opening_balance']
-    print("Test Profitttttt --->", profit)
+    
+    print("Test LTP--->", sanket_variable)
+    
+    for i in range(5):
+        time.sleep(1)
+        print(f"This is print number {i + 1}", sanket_variable)
 
-    # Define callbacks
-    def on_ticks(ws, ticks):
-        for tick in ticks:
-            print(f"{tick['last_price']}")
-    
-    def on_connect(ws, response):
-        print("Connected to WebSocket")
-        # Subscribe to a list of instrument_tokens
-        tokens = [instrument_token]  # Replace with the instrument tokens you need
-        ws.subscribe(tokens)
-        ws.set_mode(ws.MODE_LTP, tokens)  # Set mode to receive LTP updates
-    
-    def on_close(ws, code, reason):
-        print("Connection closed", code, reason)
-    
-    def on_error(ws, code, reason):
-        print("Error occurred", code, reason)
-    
-    def on_reconnect(ws, attempts_count):
-        print(f"Reconnecting: {attempts_count}")
-    
-    # Assign the callbacks to the KiteTicker instance
-    kws.on_ticks = on_ticks
-    kws.on_connect = on_connect
-    kws.on_close = on_close
-    kws.on_error = on_error
-    kws.on_reconnect = on_reconnect
+   ## Define callbacks
+   #def on_ticks(ws, ticks):
+   #    for tick in ticks:
+   #        print(f"{tick['last_price']}")
+   #
+   #def on_connect(ws, response):
+   #    print("Connected to WebSocket")
+   #    # Subscribe to a list of instrument_tokens
+   #    tokens = [instrument_token]  # Replace with the instrument tokens you need
+   #    ws.subscribe(tokens)
+   #    ws.set_mode(ws.MODE_LTP, tokens)  # Set mode to receive LTP updates
+   #
+   #def on_close(ws, code, reason):
+   #    print("Connection closed", code, reason)
+   #
+   #def on_error(ws, code, reason):
+   #    print("Error occurred", code, reason)
+   #
+   #def on_reconnect(ws, attempts_count):
+   #    print(f"Reconnecting: {attempts_count}")
+   #
+   ## Assign the callbacks to the KiteTicker instance
+   #kws.on_ticks = on_ticks
+   #kws.on_connect = on_connect
+   #kws.on_close = on_close
+   #kws.on_error = on_error
+   #kws.on_reconnect = on_reconnect
     
     # Connect to WebSocket in a threaded mode
     kws.connect(threaded=True)
